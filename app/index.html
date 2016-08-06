@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sight Reader</title>
+  <link rel="stylesheet" href="main.css"/>
+</head>
+<body>
+  <div class="container">
+    <header>Sight reader</header>
+    <div>
+      <audio data-ref="audio" src="data/bachBouree.mp3" controls></audio>
+    </div>
+
+    <div>
+      <canvas data-ref="canvas" width="1000" height="500"></canvas>
+    </div>
+  </div>
+
+  <script>var SP_APP = {};</script>
+  <script src="main.js"></script>
+  <script>SP_APP.start();</script>
+</body>
+</html>
