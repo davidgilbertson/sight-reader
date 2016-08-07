@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "index.js",
-    "build": "babel app/client --out-file public/main.js --watch",
+    "watch": "babel app/client --out-file public/main.js --source-maps --watch",
     "dev": "node index",
     "postdev": "npm run build"
   },
@@ -25,7 +25,8 @@
     "babel-preset-stage-2": "^6.13.0",
     "babel-register": "^6.11.6",
     "core-js": "^2.4.1",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "mathjs": "^3.3.0"
   },
   "babel": {
     "presets": [
