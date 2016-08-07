@@ -7,8 +7,7 @@
     "start": "index.js",
     "build": "babel app/client --out-file public/main.js",
     "watch": "babel app/client --out-file public/main.js --source-maps --watch",
-    "dev": "node index",
-    "postdev": "npm run build"
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
