@@ -1,7 +1,14 @@
 body {
   color: #222;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
 }
 
 canvas {
   border: 1px dashed gray;
+}
+
+[data-ref="note"] {
+  height: 30px;
+  font-size: 20px;
 }

@@ -8,6 +8,7 @@ SP_APP.start = () => {
       SP_APP.refs[refEl.dataset.ref] = refEl;
     }
   }
+
   buildRefs();
 
   audio.start();
