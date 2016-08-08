@@ -44,4 +44,4 @@
   }
 
   SP_APP.SmartArray = SmartArray;
-});
+})();

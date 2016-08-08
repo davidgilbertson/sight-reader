@@ -12,3 +12,10 @@ canvas {
   height: 30px;
   font-size: 20px;
 }
+
+
+rect {
+  fill: transparent;
+  stroke: #555;
+  stroke-width: 1px;
+}

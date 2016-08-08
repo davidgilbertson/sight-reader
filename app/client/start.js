@@ -1,15 +1,22 @@
 SP_APP.start = () => {
-  const {audio} = SP_APP;
+  const {Audio, Piano} = SP_APP;
 
-  function buildRefs() {
-    const refEls = document.querySelectorAll('[data-ref]');
-    SP_APP.refs = {};
-    for (let refEl of refEls) {
-      SP_APP.refs[refEl.dataset.ref] = refEl;
-    }
+  // build refs object
+  const refEls = document.querySelectorAll('[data-ref]');
+  SP_APP.refs = {};
+  for (let refEl of refEls) {
+    const ref = refEl.getAttribute('data-ref'); // dataset doesn't work on <svg>
+    SP_APP.refs[ref] = refEl;
   }
 
-  buildRefs();
 
+  const piano = new Piano();
+  piano.render();
+
+  // build the refs after rendering the piano
+  SP_APP.refManager = new SP_APP.RefManager();
+  SP_APP.refManager.getRefs();
+
+  const audio = new Audio();
   audio.start();
 };
