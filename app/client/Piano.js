@@ -79,6 +79,7 @@
         keyRect.setAttribute('height', height);
         keyRect.setAttribute('data-ref', `key_${key.pos}`);
         keyRect.setAttribute('piano-key', true);
+        keyRect.classList.add('piano-key');
         keyRect.classList.add(`piano-key--${keyDeets.color}`);
 
         if (keyDeets.color === COLORS.EBONY) {

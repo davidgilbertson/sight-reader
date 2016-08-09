@@ -24,7 +24,10 @@ text {
   stroke: none;
   fill: #ccc;
   font-size: 12px;
+}
 
+.piano-key {
+  transition: fill 150ms;
 }
 
 .piano-key--ivory {
@@ -33,4 +36,8 @@ text {
 
 .piano-key--ebony {
   fill: black;
+}
+
+.piano-key--lit {
+  fill: #2196f3;
 }

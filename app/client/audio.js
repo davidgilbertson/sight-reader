@@ -35,8 +35,8 @@
       const dataArray = new Uint8Array(bufferLength);
 
       const canvasContext = refs.canvas.getContext('2d');
-      const canvas2Context = refs.canvas2.getContext('2d');
-      this.drawPitchMarkers(canvas2Context);
+      // const canvas2Context = refs.canvas2.getContext('2d');
+      // this.drawPitchMarkers(canvas2Context);
 
       const userMediaConstraints = {audio: true};
 
@@ -56,11 +56,10 @@
 
       navigator.getUserMedia(userMediaConstraints, getUserMediaSuccess, getUserMediaError);
 
-      canvas2Context.fillStyle = 'rgba(0, 0, 0, 0.03)';
-      canvasContext.fillStyle = 'firebrick';
+      // canvas2Context.fillStyle = 'rgba(0, 0, 0, 0.03)';
 
       let lastItem = 0;
-      const STEPS_THRESHOLD = 10;
+      const STEPS_THRESHOLD = 5;
 
       const getKey = () => {
         const pitch = this.pitchSamples.mode;
@@ -84,24 +83,26 @@
       };
 
       const renderKey = () => {
-        console.log('  --  >  audio.js:107 > renderKey');
         const key = getKey();
-        refs.note.textContent = `That was note number ${key.pos}: ${key.name}`;
-        const keyEl = SP_APP.refs[`key_${key.pos}`];
+        // refs.note.textContent = `That was note number ${key.pos}: ${key.name}`;
 
         // TODO (davidg): push this out into the Piano class
         const keyEls = document.querySelectorAll('[piano-key]');
 
         for (let keyEl of keyEls) {
           keyEl.style.fill = '';
+          keyEl.classList.remove('piano-key--lit');
         }
 
-        if (keyEl) keyEl.style.fill = '#2196f3';
+        const pressedKeyEl = SP_APP.refs[`key_${key.pos}`];
+        pressedKeyEl.classList.add('piano-key--lit');
+        // if (keyEl) keyEl.style.fill = '#2196f3';
         this.pitchSamples.empty();
       };
 
       const drawWave = () => {
         if (!loudEnough) return;
+        canvasContext.fillStyle = 'firebrick';
         analyser.getByteTimeDomainData(dataArray);
         canvasContext.fillRect(0, 128, 1024, 2);
 
@@ -114,7 +115,7 @@
             if (elapsedSteps > STEPS_THRESHOLD) {
               const hertz = 1 / (elapsedSteps / sampleRate); // sampleRate = 44100
               this.pitchSamples.push(hertz);
-              canvas2Context.fillRect(4, hertz / 2, 65, 1); // pitch marker
+              // canvas2Context.fillRect(4, hertz / 2, 65, 1); // pitch marker
             }
           }
 
@@ -125,18 +126,20 @@
       };
 
       const drawFreq = () => {
+        canvasContext.fillStyle = 'lightgray';
         analyser.getByteFrequencyData(dataArray);
         let volumeTotal = 0;
+        canvasContext.fillRect(0, (300 - (256 / 10)), 1024, 1);
 
         dataArray.forEach((item, i) => {
-          canvasContext.fillRect(i, 500 - item, 1, item);
+          canvasContext.fillRect(i, 300 - item, 1, item);
           volumeTotal += item;
         });
 
         const volume = volumeTotal / dataArray.length;
         const nowLoudEnough = volume > MIN_VOLUME;
+
         if (loudEnough !== nowLoudEnough) {
-          console.log('  --  >  audio.js:160 > drawFreq SWITCHED IN/OUT OF LOUD ENOUGH');
           this.pitchSamples.empty();
         }
 
@@ -149,7 +152,7 @@
 
         if (!audioReady) return;
 
-        canvasContext.clearRect(0, 0, 1024, 500);
+        canvasContext.clearRect(0, 0, 1024, 300);
 
         drawFreq();
         drawWave();
@@ -159,7 +162,7 @@
 
       setInterval(() => {
         loudEnough && renderKey();
-      }, 100);
+      }, 250);
 
       window.addEventListener('keydown', e => {
         if (e.keyCode === 32) { // space
