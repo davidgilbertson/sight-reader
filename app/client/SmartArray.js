@@ -41,6 +41,10 @@
 
       return mode;
     }
+
+    empty() {
+      this.dataArray.length = 0;
+    }
   }
 
   SP_APP.SmartArray = SmartArray;

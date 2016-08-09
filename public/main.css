@@ -19,3 +19,18 @@ rect {
   stroke: #555;
   stroke-width: 1px;
 }
+
+text {
+  stroke: none;
+  fill: #ccc;
+  font-size: 12px;
+
+}
+
+.piano-key--ivory {
+  fill: snow;
+}
+
+.piano-key--ebony {
+  fill: black;
+}

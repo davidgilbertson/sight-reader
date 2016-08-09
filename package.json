@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "index.js",
+    "dev-server": "nodemon index.js --watch app/ --ignore app/client/",
     "build": "babel app/client --out-file public/main.js",
     "watch": "babel app/client --out-file public/main.js --source-maps --watch",
+    "dev": "concurrently --kill-others \"npm run watch\" \"npm run dev-server\"",
     "heroku-postbuild": "npm run build"
   },
   "repository": {
@@ -30,6 +31,9 @@
     "babel-register": "^6.11.6",
     "core-js": "^2.4.1",
     "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "concurrently": "^2.2.0"
   },
   "babel": {
     "presets": [

@@ -1,7 +1,7 @@
 (function() {
   const COLORS = {
-    EBONY: 'black',
-    IVORY: 'snow',
+    EBONY: 'ebony',
+    IVORY: 'ivory',
   };
   const SHIFTS = {
     LEFT: 'LEFT',
@@ -47,10 +47,8 @@
         let x = left;
         let height = 125;
         let width = 22;
-        let fill = keyDeets.color;
 
         if (keyDeets.color === COLORS.EBONY) {
-          fill = COLORS.EBONY;
           height -= 45;
           width = 11;
 
@@ -65,15 +63,23 @@
           }
         } else {
           left += 22;
+          const keyText = document.createElementNS(ns, 'text');
+          keyText.textContent = key.pos;
+
+          keyText.setAttribute('x', x + width / 2);
+          keyText.setAttribute('y', 10);
+          keyText.setAttribute('text-anchor', 'middle');
+          whiteKeyGroup.appendChild(keyText);
         }
 
         keyRect.setAttribute('rx', 2);
         keyRect.setAttribute('x', x);
-        keyRect.setAttribute('y', 0);
+        keyRect.setAttribute('y', 14);
         keyRect.setAttribute('width', width);
         keyRect.setAttribute('height', height);
         keyRect.setAttribute('data-ref', `key_${key.pos}`);
-        keyRect.style.fill = fill;
+        keyRect.setAttribute('piano-key', true);
+        keyRect.classList.add(`piano-key--${keyDeets.color}`);
 
         if (keyDeets.color === COLORS.EBONY) {
           blackKeyGroup.appendChild(keyRect);
