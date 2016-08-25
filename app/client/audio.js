@@ -54,6 +54,9 @@
         err && console.error(err);
       };
 
+      // Fallback to vendor prefixed versions.
+      window.navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+
       navigator.getUserMedia(userMediaConstraints, getUserMediaSuccess, getUserMediaError);
 
       // canvas2Context.fillStyle = 'rgba(0, 0, 0, 0.03)';
